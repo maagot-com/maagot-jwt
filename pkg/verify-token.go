@@ -12,7 +12,7 @@ func VerifyToken(tokenString string) (uint, error) {
 	secretKey := []byte(os.Getenv("JWT_KEY"))
 	// verify the signature of the token
 	parsedToken, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		_, ok := token.Method.(*jwt.SigningMethodRSA)
+		_, ok := token.Method.(*jwt.SigningMethodHMAC)
 		if !ok {
 			return nil, errors.New("Invalid signature")
 		}

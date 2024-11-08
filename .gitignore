@@ -1,6 +1,5 @@
 # Binaries for programs and plugins
 *.exe
-*backenduser
 *.exe~
 *.dll
 *.so
@@ -49,4 +48,3 @@ api_request/
 # Gin and Supabase
 /.air
 /.supabase
-

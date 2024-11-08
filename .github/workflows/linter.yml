@@ -36,3 +36,7 @@ jobs:
           args: --timeout=2m
           version: ${{ env.GOLANGCI_LINT_VERSION }}
           working-directory: ${{ matrix.modules }}
+
+      - name: go-test
+        run: go test -v ./...
+        working-directory: ${{ matrix.modules }}
