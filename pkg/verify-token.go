@@ -2,14 +2,12 @@ package pkg
 
 import (
 	"errors"
-	"os"
 
 	"github.com/golang-jwt/jwt/v5"
 )
 
 // VerifyToken verify the given token to get its payload.
-func VerifyToken(tokenString string) (uint, error) {
-	secretKey := []byte(os.Getenv("JWT_KEY"))
+func VerifyToken(tokenString string, secretKey []byte) (int64, error) {
 	// verify the signature of the token
 	parsedToken, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		_, ok := token.Method.(*jwt.SigningMethodHMAC)
@@ -33,7 +31,7 @@ func VerifyToken(tokenString string) (uint, error) {
 	if !ok {
 		return 0, errors.New("Invalid token claims")
 	}
-	userID := claims["userID"].(uint) // .(uint) means type checking
+	userID := int64(claims["userID"].(float64)) // .(float64) means type checking
 
 	return userID, nil
 }
