@@ -1,4 +1,4 @@
-module github.com/maagot/maagot-jwt
+module github.com/maagot-com/maagot-jwt
 
 go 1.23.3
 
