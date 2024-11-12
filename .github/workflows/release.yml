@@ -49,7 +49,7 @@ jobs:
           draft: false
           prerelease: false
         env:
-          TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Upload Release Assets
         uses: actions/upload-release-asset@v1
@@ -59,4 +59,4 @@ jobs:
           asset_name: maagot-jwt
           asset_content_type: application/octet-stream
         env:
-          TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
