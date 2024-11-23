@@ -7,7 +7,7 @@ import (
 )
 
 // VerifyToken verify the given token to get its payload.
-func VerifyToken(tokenString string, secretKey []byte) (int64, error) {
+func VerifyToken(tokenString string, secretKey []byte) (uint, error) {
 	// verify the signature of the token
 	parsedToken, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		_, ok := token.Method.(*jwt.SigningMethodHMAC)
@@ -23,15 +23,15 @@ func VerifyToken(tokenString string, secretKey []byte) (int64, error) {
 
 	// check the validity of token
 	if tokenIsValid := parsedToken.Valid; !tokenIsValid {
-		return 0, errors.New("Invalid token")
+		return 0, errors.New("Invalid or Expired token")
 	}
 
 	// extract claims data in the token
 	claims, ok := parsedToken.Claims.(jwt.MapClaims)
 	if !ok {
-		return 0, errors.New("Invalid token claims")
+		return 0, errors.New("Invalid claims")
 	}
-	userID := int64(claims["userID"].(float64)) // .(float64) means type checking
+	userID := claims["userID"].(uint) // .(uint) means type checking
 
 	return userID, nil
 }
